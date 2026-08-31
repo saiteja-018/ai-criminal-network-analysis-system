@@ -84,7 +84,7 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
             'label': 'data(label)',
             'color': '#f8fafc',
             'font-size': '11px',
-            'font-weight': '600',
+            'font-weight': 600,
             'text-valign': 'bottom',
             'text-margin-y': 6,
             'width': 'mapData(degree, 0, 1, 30, 60)',
@@ -93,7 +93,7 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
             'border-color': '#1e293b',
             'transition-property': 'background-color, border-color, border-width',
             'transition-duration': 0.2
-          }
+          } as any
         },
         {
           selector: 'node[isCenter = "true"]',
@@ -102,7 +102,7 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
             'border-color': '#22d3ee',
             'shadow-blur': 15,
             'shadow-color': '#22d3ee'
-          }
+          } as any
         },
         {
           selector: 'node:selected',
