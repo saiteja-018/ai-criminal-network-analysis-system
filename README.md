@@ -1,4 +1,4 @@
-# AI-Powered Criminal Network Analysis System (NEXUS INTEL)
+# AI-Powered Criminal Network Analysis System (CipherTrace AI)
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![Django 5.0](https://img.shields.io/badge/django-5.0-green.svg)](https://www.djangoproject.com/)
