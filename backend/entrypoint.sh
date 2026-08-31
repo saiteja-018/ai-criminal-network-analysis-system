@@ -1,16 +1,14 @@
 #!/bin/sh
-set -e
+set -eu
 
-echo "Waiting for PostgreSQL database at $POSTGRES_HOST:$POSTGRES_PORT..."
-while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
+echo "Waiting for PostgreSQL database at ${POSTGRES_HOST:-db}:${POSTGRES_PORT:-5432}..."
+while ! nc -z "${POSTGRES_HOST:-db}" "${POSTGRES_PORT:-5432}"; do
   sleep 1
 done
+
 echo "PostgreSQL database started!"
 
-if [ "$RUN_MIGRATIONS" = "true" ]; then
-  echo "Making migrations..."
-  python manage.py makemigrations accounts investigations entities relationships documents alerts audit --noinput
-
+if [ "${RUN_MIGRATIONS:-false}" = "true" ]; then
   echo "Running migrations..."
   python manage.py migrate --noinput
 fi

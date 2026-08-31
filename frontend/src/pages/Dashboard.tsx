@@ -12,9 +12,16 @@ import {
 } from 'recharts';
 
 const ENTITY_COLORS: Record<string, string> = {
-  PERSON: '#60a5fa', ORGANIZATION: '#818cf8', LOCATION: '#34d399',
-  VEHICLE: '#fbbf24', PHONE: '#c084fc', ACCOUNT: '#fb7185', EMAIL: '#38bdf8',
+  PERSON: '#f5f5f5',
+  ORGANIZATION: '#d4d4d4',
+  LOCATION: '#a3a3a3',
+  VEHICLE: '#fbbf24',
+  PHONE: '#fca5a5',
+  ACCOUNT: '#86efac',
+  EMAIL: '#93c5fd',
 };
+
+const CHART_COLORS = ['#f5f5f5', '#d4d4d4', '#a3a3a3', '#fbbf24', '#fca5a5', '#86efac', '#93c5fd'];
 
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -87,10 +94,10 @@ export const Dashboard: React.FC = () => {
     return acc;
   }, { LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0 });
   const barData = [
-    { name: 'Critical', count: alertSeverityCounts.CRITICAL, fill: '#ef4444' },
-    { name: 'High',     count: alertSeverityCounts.HIGH,     fill: '#f59e0b' },
-    { name: 'Medium',   count: alertSeverityCounts.MEDIUM,   fill: '#eab308' },
-    { name: 'Low',      count: alertSeverityCounts.LOW,      fill: '#10b981' },
+    { name: 'Critical', count: alertSeverityCounts.CRITICAL, fill: '#fca5a5' },
+    { name: 'High',     count: alertSeverityCounts.HIGH,     fill: '#fbbf24' },
+    { name: 'Medium',   count: alertSeverityCounts.MEDIUM,   fill: '#d4d4d4' },
+    { name: 'Low',      count: alertSeverityCounts.LOW,      fill: '#86efac' },
   ];
 
   const activityData = Array.from({ length: 7 }, (_, i) => ({
@@ -162,7 +169,7 @@ export const Dashboard: React.FC = () => {
                 <PieChart>
                   <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} innerRadius={55} paddingAngle={4} cornerRadius={4}>
                     {pieData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={['#f5f5f5', '#d4d4d4', '#a3a3a3', '#525252', '#1f1f1f'][index % 5]} stroke="none" />
+                      <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} stroke="none" />
                     ))}
                   </Pie>
                   <Tooltip contentStyle={customTooltipStyle} />
@@ -175,7 +182,7 @@ export const Dashboard: React.FC = () => {
           <div className="flex flex-wrap gap-2 mt-4">
              {pieData.slice(0, 4).map((d, index) => (
                 <div key={d.name} className="flex items-center gap-1.5 text-[11px] text-gray-400">
-                  <div className="w-2 h-2 rounded-full" style={{backgroundColor: ['#f5f5f5', '#d4d4d4', '#a3a3a3', '#525252'][index % 4]}}></div>
+                  <div className="w-2 h-2 rounded-full" style={{backgroundColor: CHART_COLORS[index % CHART_COLORS.length]}}></div>
                   {d.name}
                 </div>
              ))}
@@ -193,7 +200,7 @@ export const Dashboard: React.FC = () => {
                 <Tooltip contentStyle={customTooltipStyle} cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
                 <Bar dataKey="count" radius={[6, 6, 6, 6]}>
                   {barData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={['#f5f5f5', '#d4d4d4', '#a3a3a3', '#525252'][index]} />
+                    <Cell key={`cell-${index}`} fill={barData[index].fill} />
                   ))}
                 </Bar>
               </BarChart>
